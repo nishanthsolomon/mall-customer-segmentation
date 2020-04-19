@@ -8,51 +8,28 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 import plotly.graph_objs as go
 import plotly as py
-def kmeans(data,K):
-    #X=np.array(data)
+from plot_prediction import plot_results
 
-    X=data[['Age' , 'Annual Income (k$)' ,'Spending Score (1-100)']].iloc[: , :].values
+def kmeans(data, K):
+    X = data[[
+        'Age', 'Annual Income (k$)', 'Spending Score (1-100)']].iloc[:, :].values
     km = KMeans(
         n_clusters=K, init='random',
-        n_init=10, max_iter=300, 
+        n_init=10, max_iter=300,
         tol=1e-04, random_state=0
     )
     y_km = km.fit_predict(X)
-    labels3 = y_km
-    centroids3 = km.cluster_centers_
-    #Plotting clusters
-    data['label3'] =  labels3
-    trace1 = go.Scatter3d(
-        x= data['Age'],
-        y= data['Spending Score (1-100)'],
-        z= data['Annual Income (k$)'],
-        mode='markers',
-        marker=dict(
-            color = data['label3'], 
-            size= 3,
-            line=dict(
-                color= data['label3'],
-                width= 12
-            ),
-            opacity=0.8
-        )
-    )
-    data_ = [trace1]
-    layout = go.Layout(
-        title= 'Clusters For KMeans K=' + str(K),
-        scene = dict(
-                xaxis = dict(title  = 'Age'),
-                yaxis = dict(title  = 'Spending Score'),
-                zaxis = dict(title  = 'Annual Income')
-            )
-    )
-    fig = go.Figure(data=data_, layout=layout)
-    py.offline.iplot(fig)
+
+    plot_results(data, y_km)
+    
+
+
 def distortions(data):
-    X=data[['Age' , 'Annual Income (k$)' ,'Spending Score (1-100)']].iloc[: , :].values
+    X = data[[
+        'Age', 'Annual Income (k$)', 'Spending Score (1-100)']].iloc[:, :].values
     # calculate distortion for a range of number of cluster
     distortions = []
-    cluster=[4,6,8,10]
+    cluster = [4, 6, 8, 10]
     for c in cluster:
         km = KMeans(
             n_clusters=c, init='random',
@@ -66,13 +43,13 @@ def distortions(data):
     plt.ylabel('Distortion')
     plt.title('Elbow Method to determine the Optimum cluster number')
     plt.show()
-if __name__=="__main__":
-    data = pd.read_csv('C:\Spring2020\ANC\Mid2Project\Mall_Customers.csv')
+
+
+if __name__ == "__main__":
+    data = pd.read_csv('/home/nishanth/gits/mall-customer-segmentation/dataset/dataset.csv')
     data.isnull().any().any()
-    kmeans(data,4)
-    kmeans(data,6)
-    kmeans(data,8)
-    kmeans(data,10)
+    kmeans(data, 4)
+    kmeans(data, 6)
+    kmeans(data, 8)
+    kmeans(data, 10)
     distortions(data)
-
-

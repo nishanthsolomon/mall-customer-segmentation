@@ -16,7 +16,7 @@ class GMM():
     def __init__(self):
         columns = ['Age', 'Annual Income (k$)', 'Spending Score (1-100)',
                    'Gender_Female', 'Gender_Male']
-        
+
         self.X = get_data(columns)
         self.X_vals = self.X.values
 
@@ -28,7 +28,17 @@ class GMM():
 
         score = silhouette_score(self.X_vals, labels)
 
-        return labels, score
+        return score
+
+    def plot_silhouette_score(self, clusters, scores):
+        fig = plt.figure()
+        plt.plot(clusters, scores)
+        fig.suptitle(
+            'The Silhouette coefficient method for determining number of clusters', fontsize=20)
+        plt.xlabel('Number of Clusters', fontsize=18)
+        plt.ylabel('Silhouette Score', fontsize=16)
+        fig.savefig('test.png')
+        plt.show()
 
 
 if __name__ == "__main__":
@@ -39,15 +49,8 @@ if __name__ == "__main__":
     gmm = GMM()
 
     for n in range(4, 12, 2):
-        labels, score = gmm.train_predict_gmm(n)
+        score = gmm.train_predict_gmm(n)
         clusters.append(n)
         scores.append(score)
 
-    fig = plt.figure()
-    plt.plot(clusters, scores)
-    fig.suptitle(
-        'The Silhouette coefficient method for determining number of clusters', fontsize=20)
-    plt.xlabel('Number of Clusters', fontsize=18)
-    plt.ylabel('Silhouette Score', fontsize=16)
-    fig.savefig('test.png')
-    plt.show()
+    gmm.plot_silhouette_score(clusters, scores)
