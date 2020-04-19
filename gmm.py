@@ -19,9 +19,9 @@ class GMM():
 
         plot_results(self.X, labels)
 
-        score = silhouette_score(self.X_vals, labels)
+        silhouette_score_ = silhouette_score(self.X_vals, labels)
 
-        return score
+        return silhouette_score_
 
 
 if __name__ == "__main__":
