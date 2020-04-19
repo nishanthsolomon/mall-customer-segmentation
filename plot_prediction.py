@@ -3,7 +3,7 @@ import plotly as py
 import matplotlib.pyplot as plt
 
 
-def plot_results(data, labels):
+def plot_results(data, labels, clustering_algorithm):
     data['label3'] = labels
     trace1 = go.Scatter3d(
         x=data['Age'],
@@ -22,7 +22,7 @@ def plot_results(data, labels):
     )
     data_ = [trace1]
     layout = go.Layout(
-        title='Clusters K = ' + str(len(set(labels))),
+        title=clustering_algorithm + ' Clusters K = ' + str(len(set(labels))),
         scene=dict(
             xaxis=dict(title='Age'),
             yaxis=dict(title='Spending Score'),

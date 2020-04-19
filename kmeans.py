@@ -21,7 +21,7 @@ class KMEANS():
         )
         y_km = km.fit_predict(self.X_vals)
         distortions_score = km.inertia_
-        plot_results(self.X, y_km)
+        plot_results(self.X, y_km, KMEANS.__name__)
 
         return distortions_score
 

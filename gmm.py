@@ -17,7 +17,7 @@ class GMM():
         gmm = GaussianMixture(n_components=num_clusters).fit(self.X_vals)
         labels = gmm.predict(self.X_vals)
 
-        plot_results(self.X, labels)
+        plot_results(self.X, labels, GMM.__name__)
 
         silhouette_score_ = silhouette_score(self.X_vals, labels)
 
