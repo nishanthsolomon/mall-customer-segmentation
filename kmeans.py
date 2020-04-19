@@ -3,6 +3,7 @@ from sklearn.cluster import KMeans
 from dataset_reader import get_data
 from plot_prediction import *
 
+
 class KMEANS():
 
     def __init__(self):
@@ -23,9 +24,10 @@ class KMEANS():
         plot_results(self.X, y_km)
 
         return distortions_score
-    
+
+
 if __name__ == "__main__":
-    
+
     scores = []
     clusters = []
 
@@ -35,7 +37,7 @@ if __name__ == "__main__":
         score = kmeans.train_predict_kmeans(n)
         clusters.append(n)
         scores.append(score)
-    
+
     title = 'Elbow Method to determine the Optimum cluster number'
     x_label = 'Number of Clusters'
     y_label = 'Distortion'

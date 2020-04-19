@@ -1,8 +1,3 @@
-import scipy
-
-import pandas as pd
-import numpy as np
-
 from sklearn.metrics import silhouette_score
 from plot_prediction import *
 from sklearn.mixture import GaussianMixture
@@ -40,7 +35,7 @@ if __name__ == "__main__":
         score = gmm.train_predict_gmm(n)
         clusters.append(n)
         scores.append(score)
-    
+
     title = 'The Silhouette coefficient method for determining number of clusters'
     x_label = 'Number of Clusters'
     y_label = 'Silhouette Score'

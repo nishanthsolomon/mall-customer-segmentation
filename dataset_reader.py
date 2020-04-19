@@ -28,11 +28,5 @@ def get_data(columns):
     return data
 
 
-def get_pca_data():
-    pca_data = pd.read_csv('./dataset/pca_dataset.csv')
-
-    return pca_data
-
-
 if __name__ == "__main__":
     create_dataset()
