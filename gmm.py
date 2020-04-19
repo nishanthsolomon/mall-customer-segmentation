@@ -3,10 +3,8 @@ import scipy
 import pandas as pd
 import numpy as np
 
-import matplotlib.pyplot as plt
-
 from sklearn.metrics import silhouette_score
-from plot_prediction import plot_results
+from plot_prediction import *
 from sklearn.mixture import GaussianMixture
 from dataset_reader import get_data
 
@@ -30,16 +28,6 @@ class GMM():
 
         return score
 
-    def plot_silhouette_score(self, clusters, scores):
-        fig = plt.figure()
-        plt.plot(clusters, scores)
-        fig.suptitle(
-            'The Silhouette coefficient method for determining number of clusters', fontsize=20)
-        plt.xlabel('Number of Clusters', fontsize=18)
-        plt.ylabel('Silhouette Score', fontsize=16)
-        fig.savefig('test.png')
-        plt.show()
-
 
 if __name__ == "__main__":
 
@@ -52,5 +40,9 @@ if __name__ == "__main__":
         score = gmm.train_predict_gmm(n)
         clusters.append(n)
         scores.append(score)
+    
+    title = 'The Silhouette coefficient method for determining number of clusters'
+    x_label = 'Number of Clusters'
+    y_label = 'Silhouette Score'
 
-    gmm.plot_silhouette_score(clusters, scores)
+    plot_scores(clusters, scores, title, x_label, y_label)

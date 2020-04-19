@@ -1,5 +1,6 @@
 import plotly.graph_objs as go
 import plotly as py
+import matplotlib.pyplot as plt
 
 
 def plot_results(data, labels):
@@ -29,4 +30,14 @@ def plot_results(data, labels):
         )
     )
     fig = go.Figure(data=data_, layout=layout)
+
     py.offline.plot(fig)
+
+
+def plot_scores(clusters, scores, title, x_label, y_label):
+    fig = plt.figure()
+    plt.plot(clusters, scores)
+    fig.suptitle(title, fontsize=20)
+    plt.xlabel(x_label, fontsize=18)
+    plt.ylabel(y_label, fontsize=16)
+    plt.show()
